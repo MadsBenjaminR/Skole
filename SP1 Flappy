@@ -24,19 +24,20 @@ void draw() {
   if (state==1) {
     background(255);
 
-// The Bird
+    // The Bird
     fill(255, 0, 0);
     circle(width/6, character, 40);
-// increment moving bird
+    // increment moving bird
     if (mousePressed)
       characterSpeed=characterSpeed-0.1;
     else
       characterSpeed=characterSpeed+0.1;
 
     character=character+characterSpeed;
-// Movementspeed of bird
+    // Movementspeed of bird
     if (character<0)
       character=0;
+
     else if (character>height)
       character=height;
     if (characterSpeed<-4)
@@ -45,16 +46,16 @@ void draw() {
       characterSpeed=4;
 
 
-// The Walls
+    // The Walls
     fill(100, 255, 100);
     rect(wallX, wallY, 30, 150);
-// increment moving wall
+    // increment moving wall
     wallX=wallX-wallSpeed;
     if (wallX<0) {
       wallX=width;
       wallY=random(height)-150/2;
     }
-// test collision and gameover screen
+    // test collision and gameover screen
     if (circleRect(50, character, 15, wallX, wallY, 30, 150))
       state=2;
   } else if (state==2) {
@@ -65,32 +66,33 @@ void draw() {
     text("thank you for playing", 50, 110);
   }
 }
-// Trying to reset game (Work in progress..)
-// Hold 'r' to continue
+// Press 'r' to continue game
 void keyPressed() {
-  if (key =='r');
+  if (key =='r') {
   state=1;
+  wallX=width;
+  }
 }
 
 // Collision parameters
 boolean circleRect(float cx, float cy, float radius, float rx, float ry, float rw, float rh) {
 
-// temporary variables to set edges for testing
+  // temporary variables to set edges for testing
   float testX = cx;
   float testY = cy;
 
-// test side closeness
+  // test side closeness
   if (cx < rx)         testX = rx;      // left side
   else if (cx > rx+rw) testX = rx+rw;   // right side
   if (cy < ry)         testY = ry;      // top side
   else if (cy > ry+rh) testY = ry+rh;   // bottom side
 
-// get distance from closest side
+  // get distance from closest side
   float distX = cx-testX;
   float distY = cy-testY;
   float distance = sqrt( (distX*distX) + (distY*distY) );
 
-// if the distance is less than the radius, collision!
+  // if the distance is less than the radius, collision!
   if (distance <= radius) {
     return true;
   }
