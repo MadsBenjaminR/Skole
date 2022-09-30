@@ -77,7 +77,7 @@ void keyPressed() {
 // Collision parameters
 boolean circleRect(float cx, float cy, float radius, float rx, float ry, float rw, float rh) {
 
-  // temporary variables to set edges for testing
+  // temporary variables to set sides for testing
   float testX = cx;
   float testY = cy;
 
